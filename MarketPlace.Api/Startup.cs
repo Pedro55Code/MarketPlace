@@ -37,6 +37,7 @@ namespace MarketPlace.Api
             services.AddAutoMapper(typeof(UsuarioProfile));
             services.AddDbContext<MarketPlaceContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("marketPlaceConnection")));
             services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<IAcessoService, AcessoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
