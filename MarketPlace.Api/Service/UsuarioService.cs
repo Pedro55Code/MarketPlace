@@ -37,20 +37,36 @@ namespace MarketPlace.Api.Service
                 return false;
             }
         }
-
-        public Usuario ObterUsuario(int id)
+        
+        public bool InserirEnderecoUsuario(EnderecoTable endereco)
         {
             try
             {
-                var a = _context.Usuario
-                    .AsNoTracking()
-                    //.Where(w => w.Id == id)
-                    .ProjectTo<Usuario>(_mapper.ConfigurationProvider).FirstOrDefault();
+                _context.Endereco.Add(endereco);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
-                return _context.Usuario
+        public UsuarioTable ObterUsuario(int id)
+        {
+            try
+            {
+                var e = _context.Endereco.Include(b => b.Usuario)
                     .AsNoTracking()
-                    .Where(w => w.IdUsuario == id)
-                    .ProjectTo<Usuario>(_mapper.ConfigurationProvider).FirstOrDefault();
+                    .First();
+
+                var a = _context.Usuario.Include(b => b.Endereco)
+                    .AsNoTracking()
+                    .Where(w => w.Id == id)
+                    //.ProjectTo<Usuario>(_mapper.ConfigurationProvider)
+                    .FirstOrDefault();
+
+                return a;
             }
             catch (Exception e)
             {
@@ -62,10 +78,13 @@ namespace MarketPlace.Api.Service
         {
             try
             {
+                //_context.Usuario.FirstOrDefault(f => f.IdUsuario == usuario.IdUsuario);
+                //_context.Usuario.Update(usuario);
                 _context.Entry(usuario).State = EntityState.Modified;
                 _context.SaveChanges();
                 return true;
-            } catch(Exception e)
+            } 
+            catch(Exception e)
             {
                 return false;
             }
@@ -75,7 +94,7 @@ namespace MarketPlace.Api.Service
         {
             try
             {
-                _context.Remove(new UsuarioTable { IdUsuario = idUsuario});
+                _context.Remove(new UsuarioTable { Id = idUsuario});
                 _context.SaveChanges();
 
                 return true;

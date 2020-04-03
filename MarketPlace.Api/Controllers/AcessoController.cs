@@ -22,7 +22,7 @@ namespace MarketPlace.Api.Controllers
 
         [HttpGet]
         [Route("ObterAcesso")]
-        public Acesso ObterAcesso(int id)
+        public AcessoTable ObterAcesso(int id)
         {
             return _acessoService.ObterAcesso(id);
         }

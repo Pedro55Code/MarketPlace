@@ -10,8 +10,9 @@ namespace MarketPlace.Api.Interface
 {
     public interface IUsuarioService
     {
-        Usuario ObterUsuario(int id);
+        UsuarioTable ObterUsuario(int id);
         bool InserirUsuario(UsuarioTable usuario);
+        bool InserirEnderecoUsuario(EnderecoTable endereco);
         bool AlterarUsuario(UsuarioTable usuario);
         bool ExcluirUsuario(int idUsuario);
     }

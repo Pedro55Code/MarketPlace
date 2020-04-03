@@ -38,19 +38,15 @@ namespace MarketPlace.Api.Service
             }
         }
 
-        public Acesso ObterAcesso(int id)
+        public AcessoTable ObterAcesso(int id)
         {
             try
             {
-                var a = _context.Acesso
-                    .AsNoTracking()
-                    //.Where(w => w.Id == id)
-                    .ProjectTo<Acesso>(_mapper.ConfigurationProvider).FirstOrDefault();
-
                 return _context.Acesso
                     .AsNoTracking()
                     .Where(w => w.IdAcesso == id)
-                    .ProjectTo<Acesso>(_mapper.ConfigurationProvider).FirstOrDefault();
+                    //.ProjectTo<Acesso>(_mapper.ConfigurationProvider)
+                    .FirstOrDefault();
             }
             catch (Exception e)
             {

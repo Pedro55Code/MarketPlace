@@ -10,6 +10,7 @@ using MarketPlace.Api.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,12 +31,13 @@ namespace MarketPlace.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "MarketPlace", Version = "v1" });
             });
-            services.AddAutoMapper(typeof(UsuarioProfile));
             services.AddDbContext<MarketPlaceContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("marketPlaceConnection")));
+            services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IAcessoService, AcessoService>();
         }

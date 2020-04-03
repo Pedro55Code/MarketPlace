@@ -22,7 +22,7 @@ namespace MarketPlace.Api.Controllers
 
         [HttpGet]
         [Route("ObterUsuario")]
-        public Usuario ObterUsuario(int id)
+        public UsuarioTable ObterUsuario(int id)
         {
             return _usuarioService.ObterUsuario(id);
         }
@@ -35,11 +35,19 @@ namespace MarketPlace.Api.Controllers
         }
 
         [HttpPost]
+        [Route("InserirEnderecoUsuario")]
+        public bool InserirEnderecoUsuario([FromBody]EnderecoTable endereco)
+        {
+            return _usuarioService.InserirEnderecoUsuario(endereco);
+        }
+
+        [HttpPost]
         [Route("AlterarUsuario")]
         public bool AlterarUsuario([FromBody]UsuarioTable usuario)
         {
             return _usuarioService.AlterarUsuario(usuario);
         }
+
 
         [HttpDelete]
         [Route("AlterarUsuario")]
