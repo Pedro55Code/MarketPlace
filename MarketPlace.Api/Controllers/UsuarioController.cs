@@ -35,13 +35,6 @@ namespace MarketPlace.Api.Controllers
         }
 
         [HttpPost]
-        [Route("InserirEnderecoUsuario")]
-        public bool InserirEnderecoUsuario([FromBody]EnderecoTable endereco)
-        {
-            return _usuarioService.InserirEnderecoUsuario(endereco);
-        }
-
-        [HttpPost]
         [Route("AlterarUsuario")]
         public bool AlterarUsuario([FromBody]UsuarioTable usuario)
         {
@@ -50,7 +43,7 @@ namespace MarketPlace.Api.Controllers
 
 
         [HttpDelete]
-        [Route("AlterarUsuario")]
+        [Route("ExcluirUsuario")]
         public bool ExcluirUsuario(int idUsuario)
         {
             return _usuarioService.ExcluirUsuario(idUsuario);

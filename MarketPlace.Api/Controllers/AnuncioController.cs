@@ -27,19 +27,19 @@ namespace MarketPlace.Api.Controllers
             return _anuncioService.ObterAnuncios(filtro);
         }
 
-        //[HttpPost]
-        //[Route("InserirAcesso")]
-        //public bool InserirAcesso([FromBody]AcessoTable Acesso)
-        //{
-        //    return _acessoService.InserirAcesso(Acesso);
-        //}
+        [HttpPost]
+        [Route("InserirAnuncio")]
+        public void InserirAnuncio([FromBody]AcessoTable Acesso)
+        {
+            //return _acessoService.InserirAnuncio(Acesso);
+        }
 
-        //[HttpPost]
-        //[Route("AlterarAcesso")]
-        //public bool AlterarAcesso([FromBody]AcessoTable Acesso)
-        //{
-        //    return _acessoService.AlterarAcesso(Acesso);
-        //}
+        [HttpPost]
+        [Route("AlterarAnuncio")]
+        public void AlterarAnuncio([FromBody]AcessoTable Acesso)
+        {
+            //return _acessoService.AlterarAnuncio(Acesso);
+        }
 
         //[HttpDelete]
         //[Route("AlterarAcesso")]

@@ -12,7 +12,6 @@ namespace MarketPlace.Api.Interface
     {
         UsuarioTable ObterUsuario(int id);
         bool InserirUsuario(UsuarioTable usuario);
-        bool InserirEnderecoUsuario(EnderecoTable endereco);
         bool AlterarUsuario(UsuarioTable usuario);
         bool ExcluirUsuario(int idUsuario);
     }

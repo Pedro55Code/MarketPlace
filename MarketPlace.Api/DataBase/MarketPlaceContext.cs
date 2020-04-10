@@ -22,10 +22,14 @@ namespace MarketPlace.Api.DataBase
 
         protected void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UsuarioTable>().Property(p => p.Id).UseIdentityColumn();
             modelBuilder.Entity<UsuarioTable>().HasOne(h => h.Endereco).WithOne(h => h.Usuario).HasForeignKey<EnderecoTable>(f => f.IdUsuario);
-             //modelBuilder.Entity<UsuarioTable>()
-             //   .HasOptional(s => s.Endereco) // Mark Address property optional in Student entity
-             //   .WithRequired(ad => ad.Usuario);
+            modelBuilder.Entity<UsuarioTable>().HasOne(h => h.Acesso).WithOne(h => h.Usuario).HasForeignKey<AcessoTable>(f => f.IdUsuario);
+
+            
+            //modelBuilder.Entity<UsuarioTable>()
+            //   .HasOptional(s => s.Endereco) // Mark Address property optional in Student entity
+            //   .WithRequired(ad => ad.Usuario);
             //modelBuilder.Configurations.Add(new UsuarioMap());
             //modelBuilder.Configurations.Add(new EnderecoMap());
             //modelBuilder.Configurations.Add(new EstadoMap());

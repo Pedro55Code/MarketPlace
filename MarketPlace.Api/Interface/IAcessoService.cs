@@ -9,9 +9,7 @@ namespace MarketPlace.Api.Interface
 {
     public interface IAcessoService
     {
-        AcessoTable ObterAcesso(int id);
-        bool InserirAcesso(AcessoTable acesso);
+        bool ValidarAcesso(string email, string senha);
         bool AlterarAcesso(AcessoTable acesso);
-        bool ExcluirAcesso(int idAcesso);
     }
 }

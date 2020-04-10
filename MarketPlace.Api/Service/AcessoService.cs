@@ -24,33 +24,20 @@ namespace MarketPlace.Api.Service
             _mapper = mapper;
         }
 
-        public bool InserirAcesso(AcessoTable Acesso)
+        public bool ValidarAcesso(string email, string senha)
         {
             try
             {
-                _context.Acesso.Add(Acesso);
-                _context.SaveChanges();
-                return true;
+                var valida = _context.Acesso
+                    .AsNoTracking()
+                    .Where(w => w.Email == email && w.Senha == senha)
+                    .FirstOrDefault();
+
+                return valida == null ? false : true ;
             }
             catch (Exception e)
             {
                 return false;
-            }
-        }
-
-        public AcessoTable ObterAcesso(int id)
-        {
-            try
-            {
-                return _context.Acesso
-                    .AsNoTracking()
-                    .Where(w => w.IdAcesso == id)
-                    //.ProjectTo<Acesso>(_mapper.ConfigurationProvider)
-                    .FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                return null;
             }
         }
 
@@ -60,21 +47,6 @@ namespace MarketPlace.Api.Service
             {
                 _context.Entry(Acesso).State = EntityState.Modified;
                 _context.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
-        public bool ExcluirAcesso(int idAcesso)
-        {
-            try
-            {
-                _context.Remove(new AcessoTable { IdAcesso = idAcesso });
-                _context.SaveChanges();
-
                 return true;
             }
             catch (Exception e)

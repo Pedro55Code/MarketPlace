@@ -29,21 +29,24 @@ namespace MarketPlace.Api.Service
             try
             {
                 _context.Usuario.Add(usuario);
+
+                var endereco = usuario.Endereco;
+
+                var acesso = usuario.Acesso;
+                
                 _context.SaveChanges();
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-        
-        public bool InserirEnderecoUsuario(EnderecoTable endereco)
-        {
-            try
-            {
-                _context.Endereco.Add(endereco);
+
+                var idUsuario = usuario.Id;
+
+                endereco.IdUsuario = idUsuario;
+
+                acesso.IdUsuario = idUsuario;
+
+                _context.Entry(endereco).State = EntityState.Modified;
+                _context.Entry(acesso).State = EntityState.Modified;
+
                 _context.SaveChanges();
+
                 return true;
             }
             catch (Exception e)
@@ -78,8 +81,6 @@ namespace MarketPlace.Api.Service
         {
             try
             {
-                //_context.Usuario.FirstOrDefault(f => f.IdUsuario == usuario.IdUsuario);
-                //_context.Usuario.Update(usuario);
                 _context.Entry(usuario).State = EntityState.Modified;
                 _context.SaveChanges();
                 return true;
@@ -94,7 +95,12 @@ namespace MarketPlace.Api.Service
         {
             try
             {
-                _context.Remove(new UsuarioTable { Id = idUsuario});
+                var usuario = _context.Usuario.AsNoTracking().Where(w => w.Id == idUsuario).FirstOrDefault();
+
+                usuario.Registro_Exclusao = DateTime.Now;
+
+                _context.Entry(usuario).State = EntityState.Modified;
+
                 _context.SaveChanges();
 
                 return true;

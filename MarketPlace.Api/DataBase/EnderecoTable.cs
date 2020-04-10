@@ -9,11 +9,11 @@ namespace MarketPlace.Api.DataBase
 {
     public class EnderecoTable
     {
-        [Key]
         [ForeignKey("Usuario")]
-        public int Id { get; set; }
-        public int IdUsuario { get; set; }
-        public UsuarioTable Usuario { get; set; }
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int? Id { get; set; }
+        public int? IdUsuario { get; set; }
+        public UsuarioTable? Usuario { get; set; }
         public int IdBairro { get; set; }
         //public BairroTable Bairro { get; set; }
         public string Logradouro { get; set; }

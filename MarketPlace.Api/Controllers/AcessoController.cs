@@ -21,17 +21,10 @@ namespace MarketPlace.Api.Controllers
         }
 
         [HttpGet]
-        [Route("ObterAcesso")]
-        public AcessoTable ObterAcesso(int id)
+        [Route("ValidarAcesso")]
+        public bool ValidarAcesso(string email, string senha)
         {
-            return _acessoService.ObterAcesso(id);
-        }
-
-        [HttpPost]
-        [Route("InserirAcesso")]
-        public bool InserirAcesso([FromBody]AcessoTable Acesso)
-        {
-            return _acessoService.InserirAcesso(Acesso);
+            return _acessoService.ValidarAcesso(email, senha);
         }
 
         [HttpPost]
@@ -39,13 +32,6 @@ namespace MarketPlace.Api.Controllers
         public bool AlterarAcesso([FromBody]AcessoTable Acesso)
         {
             return _acessoService.AlterarAcesso(Acesso);
-        }
-
-        [HttpDelete]
-        [Route("AlterarAcesso")]
-        public bool ExcluirAcesso(int idAcesso)
-        {
-            return _acessoService.ExcluirAcesso(idAcesso);
         }
     }
 }
